@@ -1,5 +1,7 @@
 import axios from "axios";
 
-export const apiCodeBurger = axios.create({
+const apiCodeBurger = axios.create({
   baseURL: "http://localhost:3001",
 });
+
+export default apiCodeBurger;
