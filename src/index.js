@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import Login from './containers/login';
-import GlobalStyles from './styles/globalStyles';
+import Login from "./containers/Login";
+import Register from "./containers/Register";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import GlobalStyles from "./styles/globalStyles";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <>
-<Login />
-<GlobalStyles />
-</>
+  <>
+    <Login />
+    <GlobalStyles />
+  </>
 );
-
-
