@@ -27,6 +27,11 @@ export const ContainerItens = styled.div`
   flex-direction: column;
   justify-content: center;
 
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
   h1 {
     font-style: normal;
     font-weight: 500;
@@ -36,10 +41,12 @@ export const ContainerItens = styled.div`
     text-align: center;
     margin-top: 100px;
   }
+
   @media (max-width: 1024px) {
     height: 70%;
     width: 90%;
     margin-bottom: 170px;
+    border-radius: 10px;
 
     img {
       margin-top: 24px;
