@@ -22,9 +22,8 @@ import {
 } from "./styles";
 
 function Login() {
-  const users = useUser();
+  const { putUserData } = useUser();
 
-  console.log(users);
   const schema = Yup.object().shape({
     email: Yup.string()
       .email("Digite um e-mail válido")
@@ -43,7 +42,7 @@ function Login() {
   });
 
   const onSubmit = async (clientData) => {
-    const response = await toast.promise(
+    const { data } = await toast.promise(
       api.post("sessions", {
         email: clientData.email,
         password: clientData.password,
@@ -55,7 +54,7 @@ function Login() {
       }
     );
 
-    console.log(response);
+    putUserData(data);
   };
 
   return (
