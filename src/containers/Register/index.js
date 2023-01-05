@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -55,9 +55,9 @@ function Register() {
         { validateStatus: () => true }
       );
 
-      if (status == 201 || status == 200) {
+      if (status === 201 || status === 200) {
         toast.success("Cadastro criado com sucesso");
-      } else if (status == 409) {
+      } else if (status === 409) {
         toast.error("E-mail já cadastrado !");
       } else {
         throw new Error();
@@ -112,7 +112,10 @@ function Register() {
           </Button>
         </form>
         <SignInLink>
-          Já possui conta ? <a>Sign In</a>
+          Já possui conta ?{" "}
+          <Link style={{ color: "white" }} to="/login">
+            Sign In
+          </Link>
         </SignInLink>
       </ContainerItens>
     </Container>
