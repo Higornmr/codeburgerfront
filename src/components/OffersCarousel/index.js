@@ -10,7 +10,7 @@ import {
   Image,
   Button,
 } from "./styles";
-
+import formatCurrency from "../../utils/formatCurrency";
 import api from "../../services/api";
 
 function OffersCarousel() {
@@ -19,7 +19,11 @@ function OffersCarousel() {
     async function loadOffers() {
       const { data } = await api.get("products");
 
-      const onlyOffers = data.filter((products) => products.offer);
+      const onlyOffers = data
+        .filter((products) => products.offer)
+        .map((products) => {
+          return { ...products, formatedPrice: formatCurrency(products.price) };
+        });
 
       setOffers(onlyOffers);
     }
@@ -49,7 +53,7 @@ function OffersCarousel() {
             <ContainerItems key={products.id}>
               <Image src={products.url} alt="foto da oferta" />
               <p>{products.name}</p>
-              <p>{products.price}</p>
+              <p>{products.formatedPrice}</p>
               <Button>Peça agora</Button>
             </ContainerItems>
           ))}
