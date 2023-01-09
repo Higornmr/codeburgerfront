@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import Button from "../../components/Button";
+import { Button } from "../../components";
 import api from "../../services/api";
 import RegisterImg from "../../assets/register-image.svg";
 import Logo from "../../assets/logo.svg";
@@ -20,7 +20,7 @@ import {
   ErrorMessage,
 } from "./styles";
 
-function Register() {
+export function Register() {
   const schema = Yup.object().shape({
     name: Yup.string().required("O seu nome é obrigatório"),
     email: Yup.string()
@@ -121,5 +121,3 @@ function Register() {
     </Container>
   );
 }
-
-export default Register;

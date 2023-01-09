@@ -13,7 +13,7 @@ import {
 import formatCurrency from "../../utils/formatCurrency";
 import api from "../../services/api";
 
-function OffersCarousel() {
+export function OffersCarousel() {
   const [offers, setOffers] = useState([]);
   useEffect(() => {
     async function loadOffers() {
@@ -61,5 +61,3 @@ function OffersCarousel() {
     </Container>
   );
 }
-
-export default OffersCarousel;
