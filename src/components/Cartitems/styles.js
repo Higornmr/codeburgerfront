@@ -17,6 +17,9 @@ export const Header = styled.div`
     font-size: 16px;
     color: #b5b5b5;
   }
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const Body = styled.div`
@@ -36,10 +39,35 @@ export const Body = styled.div`
     font-size: 16px;
     color: #000;
   }
+
+  .quantity-container {
+    display: flex;
+    gap: 20px;
+
+    button {
+      height: 30px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    p {
+      margin-top: 5px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    align-items: baseline;
+  }
 `;
 
 export const EmptyCart = styled.p`
   padding: 20px;
   text-align: center;
   font-weight: bold;
+
+  @media (max-width: 1024px) {
+    align-items: baseline;
+  }
 `;
