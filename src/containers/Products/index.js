@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
-
 import ProductsLogo from "../../assets/products-logo.svg";
+import formatCurrency from "../../utils/formatCurrency";
 
-import { Container, ProductsImg, CategoryButton, CategoryMenu } from "./styles";
+import {
+  Container,
+  ProductsImg,
+  CategoryButton,
+  CategoryMenu,
+  ProductsContainer,
+} from "./styles";
+
 import api from "../../services/api";
+import CardProduct from "../../components/CardProducts";
 
 function Products() {
   const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState([0]);
 
   useEffect(() => {
@@ -17,6 +26,17 @@ function Products() {
       setCategories(newCategories);
     }
 
+    async function loadsProducts() {
+      const { data: allProducts } = await api.get("products");
+
+      const newProducts = allProducts.map((products) => {
+        return { ...products, formatedPrice: formatCurrency(products.price) };
+      });
+
+      setProducts(newProducts);
+    }
+
+    loadsProducts();
     loadCategories();
   }, []);
 
@@ -38,6 +58,12 @@ function Products() {
             </CategoryButton>
           ))}
       </CategoryMenu>
+      <ProductsContainer>
+        {products &&
+          products.map((product) => (
+            <CardProduct key={product.id} product={product} />
+          ))}
+      </ProductsContainer>
     </Container>
   );
 }

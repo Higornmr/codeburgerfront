@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  background: #e5e5e5;
 `;
 
 export const ProductsImg = styled.img`
@@ -31,9 +32,24 @@ export const CategoryButton = styled.button`
 
   @media (max-width: 1024px) {
     font-size: 15px;
+    font-weight: 900;
   }
 
   @media (max-width: 800px) {
-    font-size: 10px;
+    font-size: 12px;
+  }
+`;
+
+export const ProductsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 40px;
+  justify-items: center;
+  margin-top: 20px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
   }
 `;
