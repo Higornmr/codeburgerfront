@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-elastic-carousel";
-
 import Offers from "../../assets/OFERTAS.png";
-
+import { useCart } from "../../hooks/CartContext";
 import {
   Container,
   CategoryImg,
@@ -12,17 +11,21 @@ import {
 } from "./styles";
 import formatCurrency from "../../utils/formatCurrency";
 import api from "../../services/api";
+import { useHistory } from "react-router-dom";
 
 export function OffersCarousel() {
   const [offers, setOffers] = useState([]);
+  const { putProductInCart } = useCart();
+  const { push } = useHistory();
+
   useEffect(() => {
     async function loadOffers() {
       const { data } = await api.get("products");
 
       const onlyOffers = data
-        .filter((products) => products.offer)
-        .map((products) => {
-          return { ...products, formatedPrice: formatCurrency(products.price) };
+        .filter((product) => product.offer)
+        .map((product) => {
+          return { ...product, formatedPrice: formatCurrency(product.price) };
         });
 
       setOffers(onlyOffers);
@@ -49,12 +52,19 @@ export function OffersCarousel() {
         breakPoints={breakPoints}
       >
         {offers &&
-          offers.map((products) => (
-            <ContainerItems key={products.id}>
-              <Image src={products.url} alt="foto da oferta" />
-              <p>{products.name}</p>
-              <p>{products.formatedPrice}</p>
-              <Button>Peça agora</Button>
+          offers.map((product) => (
+            <ContainerItems key={product.id}>
+              <Image src={product.url} alt="foto da oferta" />
+              <p>{product.name}</p>
+              <p>{product.formatedPrice}</p>
+              <Button
+                onClick={() => {
+                  putProductInCart(product);
+                  push("/carrinho");
+                }}
+              >
+                Peça agora
+              </Button>
             </ContainerItems>
           ))}
       </Carousel>
