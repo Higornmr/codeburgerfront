@@ -6,7 +6,6 @@ import Orders from "./Oders";
 export function Admin() {
   return (
     <Container>
-      <h1>Admin</h1>
       <Orders />
     </Container>
   );
