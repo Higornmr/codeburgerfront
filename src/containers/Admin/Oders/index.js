@@ -1,13 +1,13 @@
 import React from "react";
 
 import { Container } from "./styles";
-import Orders from "./Oders";
 
-export function Admin() {
+export function Orders() {
   return (
     <Container>
-      <h1>Admin</h1>
-      <Orders />
+      <h1>Pedidos</h1>
     </Container>
   );
 }
+
+export default Orders;
