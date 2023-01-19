@@ -16,6 +16,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import api from "../../../services/api";
 import { Container } from "./styles";
+import Row from "./row";
 
 export function Orders() {
   const [orders, setOrders] = useState([]);
@@ -48,7 +49,24 @@ export function Orders() {
 
   return (
     <Container>
-      <h1>Pedidos</h1>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Pedido</TableCell>
+              <TableCell>Cliente</TableCell>
+              <TableCell>Data do pedido</TableCell>
+              <TableCell>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <Row key={row.id} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Container>
   );
 }
