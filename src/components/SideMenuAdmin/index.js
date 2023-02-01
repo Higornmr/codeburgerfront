@@ -9,9 +9,11 @@ export function SideMenuAdmin() {
       <hr></hr>
       {listLink.map((item) => (
         <ItemContainer key={item.id}>
+          <item.icon className="icon" />
           <ListLink to={item.link}>{item.label}</ListLink>
         </ItemContainer>
       ))}
+      <hr></hr>
     </Container>
   );
 }
