@@ -5,3 +5,4 @@ export * from "./OffersCarousel";
 export * from "./Cartitems";
 export * from "./CartResume";
 export * from "./Header";
+export * from "./SideMenuAdmin";
