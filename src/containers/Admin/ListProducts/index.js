@@ -1,61 +1,64 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import api from "../../../services/api";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
-import { useUser } from "../../hooks/UserContext";
+import { Container } from "./styles";
 
-import Person from "../../assets/person.svg";
-import Cart from "../../assets/cart.svg";
+function ListProducts() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    async function loadOrders() {
+      const { data } = await api.get("products");
 
-import {
-  Container,
-  ContainerLeft,
-  PageLink,
-  ContainerRight,
-  ContainerText,
-  Line,
-  PageLinkExit,
-} from "./styles";
+      setProducts(data);
+    }
 
-export function Header() {
-  const { logout, userData } = useUser();
-  const {
-    push,
-    location: { pathname },
-  } = useHistory();
-
-  const logoutUser = () => {
-    logout();
-    push("/login");
-  };
+    loadOrders();
+  }, []);
 
   return (
     <Container>
-      <ContainerLeft>
-        <PageLink onClick={() => push("/")} isActive={pathname === "/"}>
-          Home
-        </PageLink>
-        <PageLink
-          onClick={() => push("/produtos")}
-          isActive={pathname.includes("produtos")}
-        >
-          Ver Produtos
-        </PageLink>
-      </ContainerLeft>
-
-      <ContainerRight>
-        <PageLink onClick={() => push("/carrinho")}>
-          <img src={Cart} alt="carrinho" />
-        </PageLink>
-        <Line></Line>
-        <PageLink>
-          <img src={Person} alt="pessoa" />
-        </PageLink>
-
-        <ContainerText>
-          <p>Olá, {userData.name}</p>
-          <PageLinkExit onClick={logoutUser}>Sair</PageLinkExit>
-        </ContainerText>
-      </ContainerRight>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Nome</TableCell>
+              <TableCell>Preço</TableCell>
+              <TableCell>Produto em Ofertas</TableCell>
+              <TableCell>Imagem</TableCell>
+              <TableCell>Editar</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products.map((product) => (
+              <TableRow
+                key={product.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {product.name}
+                </TableCell>
+                <TableCell>{product.price}</TableCell>
+                <TableCell>{product.offer}</TableCell>
+                <TableCell>
+                  <img src={product.url} alt="imagem-produto" />
+                </TableCell>
+                <TableCell>
+                  <button>Editar</button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Container>
   );
 }
+
+export default ListProducts;
