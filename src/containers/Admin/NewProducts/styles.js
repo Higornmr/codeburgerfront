@@ -23,15 +23,30 @@ export const Label = styled.p`
 
 export const Input = styled.input`
   height: 40px;
-  width: 100%;
   border: none;
   background: #ffffff;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin-bottom: 25px;
+  min-width: 280px;
 `;
 
 export const ButtonStyled = styled(Button)`
   width: 100%;
   margin-top: 25px;
+`;
+
+export const LabelUpload = styled.label`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px dashed #ffff;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 25px;
+  gap: 10px;
+  input {
+    opacity: 0;
+    width: 1px;
+  }
 `;
