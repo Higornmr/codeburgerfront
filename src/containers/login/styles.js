@@ -92,13 +92,3 @@ export const SignInLink = styled.p`
     margin-top: 29px;
   }
 `;
-
-export const ErrorMessage = styled.p`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
-
-  color: #cc1717;
-  margin-top: 2px;
-`;

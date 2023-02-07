@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Button } from "../../components";
+import { Button, ErrorMessage } from "../../components";
 import api from "../../services/api";
 import RegisterImg from "../../assets/register-image.svg";
 import Logo from "../../assets/logo.svg";
@@ -17,7 +17,6 @@ import {
   Label,
   Input,
   SignInLink,
-  ErrorMessage,
 } from "./styles";
 
 export function Register() {

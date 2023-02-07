@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useUser } from "../../hooks/UserContext";
-import { Button } from "../../components";
+import { Button, ErrorMessage } from "../../components";
 import api from "../../services/api";
 import LoginImg from "../../assets/login-img.svg";
 import Logo from "../../assets/logo.svg";
@@ -18,7 +18,6 @@ import {
   Label,
   Input,
   SignInLink,
-  ErrorMessage,
 } from "./styles";
 
 export function Login() {
