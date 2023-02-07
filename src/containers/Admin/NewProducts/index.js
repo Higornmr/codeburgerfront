@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactSelect from "react-select";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import api from "../../../services/api";
@@ -9,20 +9,23 @@ import { Container, Label, Input, ButtonStyled, LabelUpload } from "./styles";
 
 function NewProduct() {
   const [fileName, setFileName] = useState(null);
-  const { register, handleSubmit } = useForm();
+  const [categories, setCategories] = useState([]);
+  const { register, handleSubmit, control } = useForm();
   const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
-    async function loadOrders() {
-      const { data } = await api.get("products");
-    }
+    async function loadCategories() {
+      const { data } = await api.get("categories");
 
-    loadOrders();
+      console.log(data);
+      setCategories(data);
+    }
+    loadCategories();
   }, []);
 
   return (
     <Container>
-      <form noValidate>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Label>Nome</Label>
         <Input type="text" {...register("name")} />
 
@@ -47,7 +50,21 @@ function NewProduct() {
           />
         </LabelUpload>
 
-        <ReactSelect />
+        <Controller
+          name="category_id"
+          control={control}
+          render={({ field }) => {
+            return (
+              <ReactSelect
+                {...field}
+                options={categories}
+                getOptionLabel={(cat) => cat.name}
+                getOptionValue={(cat) => cat.id}
+                placeholder="Categoria"
+              />
+            );
+          }}
+        ></Controller>
 
         <ButtonStyled>Adicionar Produto</ButtonStyled>
       </form>
