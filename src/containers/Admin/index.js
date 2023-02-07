@@ -7,6 +7,7 @@ import ListProducts from "./ListProducts";
 import { Container, ContainerItems } from "./styles";
 import paths from "../../constants/paths";
 import NewProduct from "./NewProducts";
+import EditProduct from "./EditProduct";
 
 export function Admin({ match: { path } }) {
   return (
@@ -16,6 +17,7 @@ export function Admin({ match: { path } }) {
         {path === paths.Order && <Orders />}
         {path === paths.Products && <ListProducts />}
         {path === paths.NewProduct && <NewProduct />}
+        {path === paths.EditProduct && <EditProduct />}
       </ContainerItems>
     </Container>
   );
